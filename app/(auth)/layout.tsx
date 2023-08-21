@@ -1,9 +1,10 @@
+import { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Inter } from 'next/font/google'
 
 import '../globals.css'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Threads',
   description: 'A NextJS 13 Meta Threads Application',
 }
