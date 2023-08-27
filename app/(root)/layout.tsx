@@ -1,6 +1,6 @@
 import '../globals.css'
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import type { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
 
 import Topbar from '@/components/shared/Topbar'
@@ -26,7 +26,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <Topbar />
 
-          <main>
+          <main className="flex flex-row">
             <LeftSidebar />
 
             <section className="main-container">
