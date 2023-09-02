@@ -17,12 +17,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { UserValidation } from '@/lib/validations/user'
 import * as z from 'zod'
 import Image from 'next/image'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 interface Props {
   user: {
     id: string
-    objectID: string
+    objectId: string
     username: string
     name: string
     bio: string
@@ -32,21 +32,29 @@ interface Props {
 }
 
 const AccountProfile = ({ user, btnTitle }: Props) => {
-  const form = useForm({
+  const [files, setFiles] = useState<File[]>([])
+
+  const form = useForm<z.infer<typeof UserValidation>>({
     resolver: zodResolver(UserValidation),
     defaultValues: {
-      profile_photo: '',
-      name: '',
-      username: '',
-      bio: '',
+      profile_photo: user?.image || '',
+      name: user?.name || '',
+      username: user?.username || '',
+      bio: user?.bio || '',
     },
   })
 
   const handleImage = (
-    e: ChangeEvent,
+    e: ChangeEvent<HTMLInputElement>,
     fieldChange: (value: string) => void
   ) => {
     e.preventDefault()
+
+    const fileReader = new FileReader()
+
+    if (e.target.files && e.target.files.length > 1) {
+      const file = e.target.files[0]
+    }
   }
 
   function onSubmit(values: z.infer<typeof UserValidation>) {
@@ -103,11 +111,11 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem className="flex items-center gap-3 w-full">
+            <FormItem className="flex flex-col gap-3 w-full">
               <FormLabel className="text-base-semibold text-light-2">
                 Name
               </FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-gray-200">
+              <FormControl>
                 <Input
                   type="text"
                   className="account-form_input no-focus"
@@ -122,11 +130,11 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           control={form.control}
           name="username"
           render={({ field }) => (
-            <FormItem className="flex items-center gap-3 w-full">
+            <FormItem className="flex flex-col gap-3 w-full">
               <FormLabel className="text-base-semibold text-light-2">
                 Username
               </FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-gray-200">
+              <FormControl>
                 <Input
                   type="text"
                   className="account-form_input no-focus"
@@ -141,11 +149,11 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           control={form.control}
           name="bio"
           render={({ field }) => (
-            <FormItem className="flex items-center gap-3 w-full">
+            <FormItem className="flex flex-col gap-3 w-full">
               <FormLabel className="text-base-semibold text-light-2">
                 Bio
               </FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-gray-200">
+              <FormControl>
                 <Textarea
                   rows={10}
                   className="account-form_input no-focus"

@@ -8,11 +8,11 @@ async function Page() {
 
   const userData = {
     id: user?.id,
-    objectID: userInfo?._id,
+    objectId: userInfo?._id,
     username: userInfo?.username || user?.username,
-    name: userInfo?.name || user.fistName || '',
+    name: userInfo?.name || user?.firstName || '',
     bio: userInfo?.bio || '',
-    image: userInfo?.image || user.imageURL,
+    image: userInfo?.image || user?.imageUrl,
   }
 
   return (
