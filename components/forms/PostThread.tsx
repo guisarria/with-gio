@@ -1,5 +1,6 @@
 'use client'
 
+import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import {
   Form,
@@ -14,7 +15,6 @@ import { Textarea } from '../ui/textarea'
 import { Button } from '../ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserValidation } from '@/lib/validations/user'
-import * as z from 'zod'
 import Image from 'next/image'
 import { ChangeEvent, useState } from 'react'
 import { isBase64Image } from '@/lib/utils'
